@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Trocabook</title>
+
+    <!-- Bootstrap e Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- CSS original -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+  <div class="cadastro-wrapper">
+
+    <!-- Lado esquerdo: formulário -->
+    <div class="cadastro-form">
+      <form id="cadastroForm" method="post" novalidate>
+        
+        <div class="form-group">
+          <input type="text" class="form-control" id="nmUsuario" placeholder="Digite seu nome">
+          <div id="nmUsuario-error" class="text-danger client-error" style="display: none;"></div>
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control" id="email" placeholder="Digite seu e-mail">
+          <div id="email-error" class="text-danger client-error" style="display: none;"></div>
+        </div>
+
+        
+
+       <div class="form-group">
+            <div class="senha-wrapper">
+                <input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+                <i class="fa fa-eye" id="togglePassword"></i>
+            </div>
+
+            <!-- Regras da senha -->
+            <ul id="passwordRules" class="password-rules">
+                <li id="length" class="invalid">Mínimo de 8 caracteres</li>
+                <li id="lowercase" class="invalid">Pelo menos uma letra minúscula</li>
+                <li id="uppercase" class="invalid">Pelo menos uma letra maiúscula</li>
+                <li id="number" class="invalid">Pelo menos um número</li>
+                <li id="special" class="invalid">Pelo menos um caractere especial (@$!%*?&)</li>
+            </ul>
+
+            <div id="senha-error" class="text-danger client-error" style="display: none;"></div>
+        </div>
+
+        
+
+
+
+
+
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </div>
+
+    <!-- Lado direito: logo e faixa -->
+    <div class="cadastro-banner">
+      <a href="/">
+        <img src="/img/Design sem nome (7).svg" alt="Logo">
+      </a>
+      <h1>Cadastre-se Agora e venha mergulhar no mundo da leitura</h1>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // --- Validação das Regras da Senha ---
+    function validatePasswordRules(senha) {
+        const rules = {
+            length: senha.length >= 8,
+            lowercase: /[a-z]/.test(senha),
+            uppercase: /[A-Z]/.test(senha),
+            number: /\d/.test(senha),
+            special: /[@$!%*?&]/.test(senha)
+        };
+
+        const updateUI = (id, valid) => {
+            const el = document.getElementById(id);
+            el.classList.toggle('valid', valid);
+            el.classList.toggle('invalid', !valid);
+        };
+
+        for (const [id, valid] of Object.entries(rules)) updateUI(id, valid);
+        return Object.values(rules).every(Boolean);
+    }
+
+    // --- Validação Principal ---
+    function validateForm() {
+        let isValid = true;
+        $('.client-error').hide().text('');
+
+        const showError = (id, msg) => {
+            $(`#${id}-error`).text(msg).show();
+            isValid = false;
+        };
+
+        const nome = $('#nmUsuario').val().trim();
+        if (!nome) showError('nmUsuario', 'O nome é obrigatório.');
+
+        const email = $('#email').val().trim();
+        if (!email) showError('email', 'O e-mail é obrigatório.');
+        else if (!/^\S+@\S+\.\S+$/.test(email)) showError('email', 'E-mail inválido.');
+
+        const senha = $('#senha').val();
+        if (!senha) showError('senha', 'A senha é obrigatória.');
+        else if (!validatePasswordRules(senha)) showError('senha', 'A senha não atende aos critérios.');
+
+        return isValid;
+    }
+
+    // --- Interatividade ---
+    $(document).ready(function() {
+        $('#togglePassword').on('click', function() {
+            const field = $('#senha');
+            const type = field.attr('type') === 'password' ? 'text' : 'password';
+            field.attr('type', type);
+            $(this).toggleClass('fa-eye fa-eye-slash');
+        });
+
+        $('#cadastroForm').on('submit', function(e) {
+            e.preventDefault();
+            if (validateForm()) alert('Cadastro enviado com sucesso!');
+        });
+
+        $('#senha').on('input', function() {
+            validatePasswordRules($(this).val());
+        });
+    });
+</script>
+
+<style>
+    .valid { color: green; }
+    .invalid { color: red; }
+</style>
+</body>
+</html>
