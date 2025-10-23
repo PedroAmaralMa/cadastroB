@@ -216,7 +216,7 @@ table th, td {
 
     /* Fundo com imagem e transparência */
     background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), 
-                url('/img/premium_photo-1661962341242-a6be50e9e670.avif') no-repeat center center;
+                url('img/premium_photo-1661962341242-a6be50e9e670.avif') no-repeat center center;
     background-size: cover;
 }
 
