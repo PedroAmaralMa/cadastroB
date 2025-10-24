@@ -55,8 +55,9 @@
 
 
 
-
+        
         <button type="submit" class="btn btn-primary">Cadastrar</button>
+        
       </form>
     </div>
 
@@ -132,7 +133,10 @@
 
         $('#cadastroForm').on('submit', function(e) {
             e.preventDefault();
-            if (validateForm()) alert('Cadastro enviado com sucesso!');
+            if (validateForm()){
+                alert('Cadastro enviado com sucesso!');
+                window.location.href = "posCadastro.html"
+            } 
         });
 
         $('#senha').on('input', function() {

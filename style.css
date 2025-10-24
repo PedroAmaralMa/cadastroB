@@ -1065,3 +1065,56 @@ table th, td {
 #remove-photo-btn:hover {
     background-color: rgba(220, 53, 69, 0.8); /* Vermelho ao passar o mouse */
 }
+
+/* Banner com gradiente para páginas intermediárias */
+.intermediario-banner {
+    position: relative;
+    width: 100%;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    color: white;
+
+    /* Fundo gradiente */
+    background: linear-gradient(132deg, rgb(255, 206, 236) 0%, rgb(151, 150, 240) 100%);
+}
+
+/* Logo no canto superior esquerdo */
+.intermediario-banner a {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.intermediario-banner a img {
+    width: 120px;
+    height: auto;
+}
+
+/* Texto do banner */
+.intermediario-banner h1 {
+    margin-top: 100px; /* afasta do topo da logo */
+    font-size: 28px;
+}
+
+/* Botão com estilo igual ao cadastro */
+.btn-cadastro {
+    border: none;
+    border-radius: 6px;
+    color: #ffffff;
+    background: linear-gradient(267deg, rgb(229, 178, 254) 27.55%, rgb(104, 158, 254) 100%);
+    font-family: manrope;
+    font-size: 16px;
+    text-shadow: black 0.1em 0.1em 0.7em;
+    cursor: pointer;
+    padding: 8px 20px;
+    transition: all 0.3s ease;
+}
+
+.btn-cadastro:hover {
+    background: linear-gradient(267deg, rgb(200, 140, 230) 27.55%, rgb(80, 130, 240) 100%);
+}
